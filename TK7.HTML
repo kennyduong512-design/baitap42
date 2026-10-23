@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo mật khẩu ngẫu nhiên</title>
+</head>
+<body>
+    <h2>Tạo mật khẩu ngẫu nhiên</h2>
+
+    <button onclick="taoMatKhau()">Tạo mật khẩu</button>
+
+    <p>Mật khẩu: <strong id="ketqua"></strong></p>
+
+    <script>
+        function taoMatKhau() {
+            let kyTu = "abcdefghijklmnopqrstuvwxyz0123456789";
+            let matKhau = "";
+
+            for (let i = 0; i < 8; i++) {
+                let viTri = Math.floor(Math.random() * kyTu.length);
+                matKhau += kyTu[viTri];
+            }
+
+            document.getElementById("ketqua").textContent = matKhau;
+        }
+    </script>
+</body>
+</html>

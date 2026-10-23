@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân trang JavaScript</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        li {
+            padding: 12px;
+            margin: 5px 0;
+            background: #eff6ff;
+            border-radius: 5px;
+        }
+
+        #pagination {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #e2e8f0;
+            cursor: pointer;
+        }
+
+        button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        button:hover {
+            background: #93c5fd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Danh sách 50 mục</h2>
+
+        <ul id="danhsach"></ul>
+
+        <div id="pagination"></div>
+    </div>
+
+    <script>
+        let danhSach = [];
+
+        // Tạo danh sách gồm 50 mục
+        for (let i = 1; i <= 50; i++) {
+            danhSach.push("Mục số " + i);
+        }
+
+        let moiTrang = 10;
+        let trangHienTai = 1;
+
+        // Hiển thị danh sách theo trang
+        function hienThi(trang) {
+            trangHienTai = trang;
+
+            let batDau = (trang - 1) * moiTrang;
+            let ketThuc = batDau + moiTrang;
+
+            let dsTrang = danhSach.slice(batDau, ketThuc);
+
+            let html = "";
+
+            for (let i = 0; i < dsTrang.length; i++) {
+                html += "<li>" + dsTrang[i] + "</li>";
+            }
+
+            document.getElementById("danhsach").innerHTML = html;
+
+            taoNut();
+        }
+
+        // Tạo các nút phân trang
+        function taoNut() {
+            let tongTrang = Math.ceil(danhSach.length / moiTrang);
+            let html = "";
+
+            for (let i = 1; i <= tongTrang; i++) {
+                html += `<button
+                    class="${i === trangHienTai ? 'active' : ''}"
+                    onclick="hienThi(${i})">${i}</button>`;
+            }
+
+            document.getElementById("pagination").innerHTML = html;
+        }
+
+        // Hiển thị trang đầu tiên
+        hienThi(1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion JavaScript</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+
+        h2 {
+            color: #2563eb;
+            text-align: center;
+        }
+
+        .accordion-title {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .accordion-title:hover {
+            background: #1d4ed8;
+        }
+
+        .accordion-title::after {
+            content: "+";
+            float: right;
+            font-size: 20px;
+        }
+
+        .accordion-title.active::after {
+            content: "-";
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: #eff6ff;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .accordion-content p {
+            padding: 15px;
+            margin: 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Accordion JavaScript</h2>
+
+        <button class="accordion-title">
+            Giới thiệu về JavaScript
+        </button>
+        <div class="accordion-content">
+            <p>
+                JavaScript là ngôn ngữ lập trình giúp tạo hiệu ứng
+                và tăng tính tương tác cho trang web.
+            </p>
+        </div>
+
+        <button class="accordion-title">
+            Lợi ích của Accordion
+        </button>
+        <div class="accordion-content">
+            <p>
+                Accordion giúp ẩn và hiện nội dung, tiết kiệm diện tích
+                và làm giao diện website gọn gàng hơn.
+            </p>
+        </div>
+
+        <button class="accordion-title">
+            Cách hoạt động
+        </button>
+        <div class="accordion-content">
+            <p>
+                Khi bấm tiêu đề, JavaScript sử dụng classList.toggle()
+                để thêm hoặc xóa class active. CSS sử dụng max-height
+                và transition để tạo hiệu ứng trượt.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const titles = document.querySelectorAll(".accordion-title");
+
+        titles.forEach(function(title) {
+            title.addEventListener("click", function() {
+                this.classList.toggle("active");
+
+                const content = this.nextElementSibling;
+
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight =
+                        content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

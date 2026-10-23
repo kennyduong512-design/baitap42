@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Di chuyển khối DIV</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #khung {
+            width: 500px;
+            height: 350px;
+            margin: 20px auto;
+            background: #f1f5f9;
+            border: 2px solid #ccc;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #khoi {
+            width: 80px;
+            height: 80px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 130px;
+            left: 210px;
+            transition: top 0.1s;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Di chuyển khối DIV bằng phím mũi tên</h2>
+    <p>Nhấn phím ↑ để đi lên, phím ↓ để đi xuống.</p>
+
+    <div id="khung">
+        <div id="khoi">DI CHUYỂN</div>
+    </div>
+
+    <script>
+        let khoi = document.getElementById("khoi");
+        let viTri = 130;
+        let buoc = 10;
+
+        function diChuyen(event) {
+            if (event.key === "ArrowUp") {
+                viTri -= buoc;
+            } else if (event.key === "ArrowDown") {
+                viTri += buoc;
+            }
+
+            // Giới hạn không cho khối đi ra ngoài khung
+            viTri = Math.max(0, Math.min(270, viTri));
+
+            khoi.style.top = viTri + "px";
+        }
+
+        document.addEventListener("keydown", diChuyen);
+    </script>
+</body>
+</html>
